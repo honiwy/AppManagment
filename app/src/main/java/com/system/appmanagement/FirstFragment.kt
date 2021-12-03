@@ -1,6 +1,8 @@
 package com.system.appmanagement
 
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +37,14 @@ class FirstFragment : Fragment() {
         setupListAdapter()
         setUpSpinner()
         getApplicationList()
+
         return binding.root
+    }
+
+    private fun deleteApp(packageName: String) {
+        val intent = Intent(Intent.ACTION_DELETE)
+        intent.data = Uri.parse("package:$packageName")
+        startActivity(intent)
     }
 
     private fun setUpSpinner() {
@@ -55,6 +64,8 @@ class FirstFragment : Fragment() {
             activity?.packageManager?.getLaunchIntentForPackage(it.packageName)?.let { intent ->
                 startActivity(intent)
             }
+        }, AppAdapter.OnLongClickListener {
+            deleteApp(it.packageName)
         })
         binding.recyclerApp.adapter = listAdapter
         viewModel.displayedApp.observe(viewLifecycleOwner, Observer {
