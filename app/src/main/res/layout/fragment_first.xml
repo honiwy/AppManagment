@@ -14,26 +14,47 @@
         android:layout_height="match_parent"
         tools:context=".FirstFragment">
 
-        <Button
-            android:id="@+id/button_first"
+        <EditText
+            android:id="@+id/edit_package_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/button_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="Receive"
-            app:layout_constraintEnd_toStartOf="@+id/spinner"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:text="com.abc.haha"
+            android:text="@={viewModel.typedPackageName}"
+            app:layout_constraintEnd_toStartOf="@+id/button_uninstall"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_uninstall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Uninstall"
+            android:enabled="@{!viewModel.typedPackageName.empty}"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_package_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/edit_package_name"
+            app:layout_constraintTop_toTopOf="@+id/edit_package_name" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:prompt="@string/app_category"
+            android:selectedItemPosition="@={viewModel.selectedAppCategoryPosition}"
+            android:spinnerMode="dropdown"
+            android:visibility="@{viewModel.displayedApp==null?View.INVISIBLE:View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_uninstall" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_app"
@@ -46,22 +67,16 @@
             app:layout_constraintBottom_toTopOf="@+id/button_first"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_check" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/button_first"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="32dp"
-            android:prompt="@string/app_category"
-            android:visibility="@{viewModel.displayedApp==null?View.INVISIBLE:View.VISIBLE}"
-            android:selectedItemPosition="@={viewModel.selectedAppCategoryPosition}"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toBottomOf="@+id/button_check"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_check"
-            app:layout_constraintTop_toTopOf="@+id/button_check" />
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

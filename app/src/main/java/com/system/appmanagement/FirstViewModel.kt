@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModel
 
 class FirstViewModel : ViewModel() {
 
+    var typedPackageName = MutableLiveData<String>().apply {
+        value = ""
+    }
+
     private val _systemApp = MutableLiveData<List<App>>()
 
     private val _userInstalledApp = MutableLiveData<List<App>>()
