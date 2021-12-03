@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="app_category_list">
+        <item>@string/category_user_installed</item>
+        <item>@string/category_system</item>
+        <item>@string/category_all</item>
+    </string-array>
+</resources>
