@@ -7,8 +7,8 @@
         <import type="android.view.View"/>
         <variable
             name="app"
-            type="com.system.appmanagement.App" />
-        <variable name="viewHolder" type="com.system.appmanagement.AppAdapter"/>
+            type="com.system.appmanagement.data.App" />
+        <variable name="viewHolder" type="com.system.appmanagement.display.DisplayAppAdapter"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

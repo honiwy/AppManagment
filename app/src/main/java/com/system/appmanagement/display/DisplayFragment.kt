@@ -1,4 +1,4 @@
-package com.system.appmanagement
+package com.system.appmanagement.display
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,34 +11,43 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.system.appmanagement.databinding.FragmentFirstBinding
+import com.system.appmanagement.R
+import com.system.appmanagement.data.App
+import com.system.appmanagement.databinding.FragmentDisplayBinding
+import com.system.appmanagement.extension.getVmFactory
 
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class DisplayFragment : Fragment() {
 
-    private lateinit var listAdapter: AppAdapter
-    private val viewModel: FirstViewModel by viewModels()
-    private lateinit var binding: FragmentFirstBinding
+    private lateinit var listAdapter: DisplayAppAdapter
+    private lateinit var binding: FragmentDisplayBinding
+    private val viewModel by viewModels<DisplayViewModel> { getVmFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false)
+        binding = FragmentDisplayBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
+
         setupListAdapter()
         setUpSpinner()
         getApplicationList()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonFirst.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
     }
 
     private fun deleteApp(packageName: String) {
@@ -60,11 +69,11 @@ class FirstFragment : Fragment() {
     }
 
     private fun setupListAdapter() {
-        listAdapter = AppAdapter(AppAdapter.OnClickListener {
+        listAdapter = DisplayAppAdapter(DisplayAppAdapter.OnClickListener {
             activity?.packageManager?.getLaunchIntentForPackage(it.packageName)?.let { intent ->
                 startActivity(intent)
             }
-        }, AppAdapter.OnLongClickListener {
+        }, DisplayAppAdapter.OnLongClickListener {
             deleteApp(it.packageName)
         })
         binding.recyclerApp.adapter = listAdapter
@@ -82,10 +91,10 @@ class FirstFragment : Fragment() {
                 if (pm.getLaunchIntentForPackage(p.packageName) != null) {
                     filterResult.add(
                         App(
-                            p.packageName,
-                            p.loadLabel(it).toString(),
-                            p.flags,
-                            requireContext().packageManager.getApplicationIcon(p.packageName)
+                            packageName = p.packageName,
+                            appName = p.loadLabel(it).toString(),
+                            flags = p.flags,
+                            icon = requireContext().packageManager.getApplicationIcon(p.packageName)
                         )
                     )
                 }

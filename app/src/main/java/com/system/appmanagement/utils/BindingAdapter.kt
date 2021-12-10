@@ -1,4 +1,4 @@
-package com.system.appmanagement
+package com.system.appmanagement.utils
 
 import android.view.View
 import android.widget.AdapterView
@@ -6,13 +6,28 @@ import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingListener
 import androidx.recyclerview.widget.RecyclerView
+import com.system.appmanagement.block.BlockAppAdapter
+import com.system.appmanagement.data.App
+import com.system.appmanagement.data.AppInDatabase
+import com.system.appmanagement.display.DisplayAppAdapter
 
-@BindingAdapter("appItems")
-fun bindRecyclerViewWithAppItems(recyclerView: RecyclerView, appItems: List<App>?) {
-    appItems?.let {
+@BindingAdapter("displayApps")
+fun bindRecyclerViewWithAppItems(recyclerView: RecyclerView, displayApps: List<App>?) {
+    displayApps?.let {
         recyclerView.adapter?.apply {
             when (this) {
-                is AppAdapter -> submitList(it)
+                is DisplayAppAdapter -> submitList(it)
+            }
+        }
+    }
+}
+
+@BindingAdapter("blockApps")
+fun bindRecyclerViewWithApps(recyclerView: RecyclerView, blockApps: List<AppInDatabase>?) {
+    blockApps?.let {
+        recyclerView.adapter?.apply {
+            when (this) {
+                is BlockAppAdapter -> submitList(it)
             }
         }
     }

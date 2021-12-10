@@ -1,16 +1,17 @@
-package com.system.appmanagement
+package com.system.appmanagement.display
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.system.appmanagement.data.App
 import com.system.appmanagement.databinding.ItemAppBinding
 
-class AppAdapter(
+class DisplayAppAdapter(
     private val onClickListener: OnClickListener,
     private val onLongClickListener: OnLongClickListener
-) : ListAdapter<App, AppAdapter.AppViewHolder>(DiffCallback) {
+) : ListAdapter<App, DisplayAppAdapter.AppViewHolder>(DiffCallback) {
 
     class OnClickListener(val clickListener: (app: App) -> Unit) {
         fun onClick(app: App) = clickListener(app)

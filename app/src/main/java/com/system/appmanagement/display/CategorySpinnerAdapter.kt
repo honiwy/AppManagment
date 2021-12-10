@@ -1,4 +1,4 @@
-package com.system.appmanagement
+package com.system.appmanagement.display
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

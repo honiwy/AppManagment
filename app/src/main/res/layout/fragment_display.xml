@@ -5,14 +5,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.system.appmanagement.FirstViewModel" />
+            type="com.system.appmanagement.display.DisplayViewModel" />
         <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".FirstFragment">
+        tools:context=".display.DisplayFragment">
 
         <Spinner
             android:id="@+id/spinner"

@@ -1,4 +1,4 @@
-package com.system.appmanagement
+package com.system.appmanagement.data
 
 import android.graphics.drawable.Drawable
 
