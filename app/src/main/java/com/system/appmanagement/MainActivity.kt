@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-
-        startService(Intent(this, BlockService::class.java))
+            startForegroundService(Intent(this, BlockService::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -62,6 +61,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        stopService(Intent(this, BlockService::class.java))
+            stopService(Intent(this, BlockService::class.java))
     }
 }
